@@ -176,9 +176,9 @@ tokentype getSymbolTokenType ( char symbol ) {
     case ')':
         return rparensym;
     case '{':
-        return lbracksym;
+        return lbracesym;
     case '}':
-        return rbracksym;
+        return rbracesym;
     case '=':
         return eqlsym;
     case ';':

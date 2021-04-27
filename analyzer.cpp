@@ -45,15 +45,32 @@ void analyze( std::list<Token> tokenlist ) {
                     std::cout << "(Line " << line_number << ") Error: Space should follow inline comment start.\n";
                 }
 
+                // Go back 3, check if a newline character
+                std::list<Token>::iterator prev_3 = std::prev(i, 3);
+
+                if (prev_3->getType() != newlinesym) {
+                    std::cout << "(Line " << line_number << ") Error: Comment must begin on new line.\n";
+                }
+
+            } else {
+                i = std::prev(i, 1);
             }
 
         }
 
         // No space between # and define/include
 
-        // Comment should be on it's own line
-
         // Curly brace should be on its own line
+        else if (i->getType() == lbracesym) {
+
+            std::list<Token>::iterator prev = std::prev(i, 1);
+
+            if (prev->getType() != newlinesym) {
+                std::cout << "(Line " << line_number << ") Error: Curly brace must begin on new line.\n";
+            }
+
+
+        }
 
         // Curly brace should be left aligned
 
@@ -83,6 +100,8 @@ void analyze( std::list<Token> tokenlist ) {
                     std::cout << "(Line " << line_number << ") Error: main() parameters cannot be empty.\n";
                 }
 
+            } else {
+                i = std::prev(i, 1);
             }
 
 

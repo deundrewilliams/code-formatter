@@ -14,7 +14,7 @@ https://cs50.readthedocs.io/style/c/
 - Common C Style Guidelines (to be applied to all files
     - Line Length <= 80
     - Space after // when writing a comment
-    - No space between # and define-
+    - No space between # and define/include/etc.
     - Comment should be on its own line
     - Curly brace should be on its own line (for, else, if, etc.)
     - Curly brace should be left aligned, not centered, in middle, etc.
