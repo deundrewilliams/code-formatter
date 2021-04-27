@@ -1,0 +1,54 @@
+Takes in poorly formatted code, outputs code that follows the style guideline
+
+- Could use some example code, and build rules off of that
+- First supported language is C, can move to Java, Python, etc. later
+
+- To start off, will just output a list of errors, not actually reformat code
+
+- Steps of Code Formatter
+    - (driver.cpp)
+    - (lexer.cpp) read and tokenize 'dirty' file, -> token list ->
+    - (analyzer.cpp) analyze token list and compare against coding standards, output errors
+
+https://cs50.readthedocs.io/style/c/
+- Common C Style Guidelines (to be applied to all files
+    - Line Length <= 80
+    - Space after // when writing a comment
+    - No space between # and define-
+    - Comment should be on its own line
+    - Curly brace should be on its own line (for, else, if, etc.)
+    - Curly brace should be left aligned, not centered, in middle, etc.
+    - Do not do int main(), have void, argc, argv, etc.
+    - Indent 4 spaces at a time
+    - When declaring pointer, asterisk should go next to identifier
+    - Don't mix declaring and initializing variables
+
+
+- Reserved Words: const, enum
+
+- Symbols:
+    - opersym -> * - / % +
+    - lesssym -> <
+    - gtrsym -> >
+    - poundsym -> #
+    - semisym -> ;
+    - lparensym -> (
+    - rparensym -> )
+    - lbracksym -> {
+    - rbracksym -> }
+    - periodsym -> .
+    - quotesym -> "
+    - questsym -> ?
+    - eqlsym -> =
+    - commasym -> ,
+    - colonsym -> :
+    - typespecsym -> void, char, short, int, long, float, double, signed, unsigned
+    - identsym -> (any identifier)
+    - spacesym -> " "
+    - newlinesym -> "\n"
+    - structsym -> struct
+    - inlstartsym -> //
+    - jumpsym -> continue, break, return
+    - decisionsym -> while, if, else, for
+    - constsym -> const
+    - enumsym -> enum
