@@ -59,6 +59,15 @@ void analyze( std::list<Token> tokenlist ) {
         }
 
         // No space between # and define/include
+        else if (i->getType() == poundsym) {
+
+            std::list<Token>::iterator next = std::next(i, 1);
+
+            if (next->getType() == spacesym) {
+                std::cout << "(Line " << line_number << ") Error: There should be no space between preprocessor directives.\n";
+            }
+
+        }
 
         // Curly brace should be on its own line
         else if (i->getType() == lbracesym) {
