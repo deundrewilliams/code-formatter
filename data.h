@@ -7,7 +7,7 @@
 typedef enum {
     opsym = 1, lesssym, gtrsym, poundsym, semisym, lparensym, rparensym,
     lbracksym, rbracksym, lbracesym, rbracesym, periodsym, quotesym, questsym, eqlsym, commasym, slashsym,
-    colonsym, typespecsym, identnumsym, spacesym, newlinesym, tabsym, structsym, inlstartsym,
+    colonsym, astsym, typespecsym, identnumsym, spacesym, newlinesym, tabsym, structsym, inlstartsym,
     decisionsym, constsym, enumsym, linelensym, jmpsym
 } tokentype;
 

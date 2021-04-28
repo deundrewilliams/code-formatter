@@ -6,6 +6,7 @@
 void analyze( std::list<Token> tokenlist ) {
 
     auto i = tokenlist.begin();
+    std::list<Token>::iterator next;
 
     int line_number = 1;
 
@@ -68,7 +69,7 @@ void analyze( std::list<Token> tokenlist ) {
         // No space between # and define/include
         else if (i->getType() == poundsym) {
 
-            std::list<Token>::iterator next = std::next(i, 1);
+            next = std::next(i, 1);
 
             if (next->getType() == spacesym) {
                 std::cout << "(Line " << line_number << ") Error: There should be no space between preprocessor directives.\n";
@@ -127,6 +128,43 @@ void analyze( std::list<Token> tokenlist ) {
         // Indent 4 spaces at a time
 
         // When declaring a pointer, asterisk, should go next to identifier
+        else if (i ->getType() == typespecsym) {
+
+            // Get next token
+            next = std::next(i, 1);
+
+            // If space
+            if (next->getType() == spacesym) {
+
+                // Get next token
+                next = std::next(next, 1);
+
+                // If asterisk
+                if (next->getType() == astsym) {
+
+                    // std::cout << "Here\n";
+
+                    // Get next token
+                    next = std::next(next, 1);
+
+                    // If not identifier
+                    if (next->getType() != identnumsym) {
+
+                        // Throw error
+                        std::cout << "(Line " << line_number << ") Error: Asterisk should be next to identifer in pointer declaration.\n";
+
+                    }
+                }
+            }
+            // If asterisk
+            if (next->getType() == astsym) {
+
+                // Throw error
+                std::cout << "(Line " << line_number << ") Error: Asterisk should be next to identifer in pointer declaration.\n";
+
+            }
+
+        }
 
         // Don't mix declaring and initializing variables
 

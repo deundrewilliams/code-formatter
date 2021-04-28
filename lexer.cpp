@@ -185,7 +185,8 @@ tokentype getSymbolTokenType ( char symbol ) {
         return semisym;
     case '/':
         return slashsym;
-
+    case '*':
+        return astsym;
     default:
         return opsym;
     }
