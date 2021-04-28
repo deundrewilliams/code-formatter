@@ -1,19 +1,18 @@
 #include <stdio.h>
 
-int main(void)
+int main()
 {
 
-    // Bad formatted comment
+    //Bad formatted comment
     int x = 12;
 
     int *e = NULL;
-    int *b = NULL;
+    int * b = NULL;
     int *r = NULL;
 
-    char buffer[] = ";lskdjaslkdja;dlakdjflksdfalsd;fsldksld";
+    char buffer[] = ";lskdjaslkdjaasalsaksjdalksalksmaslkmdlask;dlakdjflksdfalsd;fsldksld";
 
-    for (int i = 0; i < 4; i++)
-    {
+    for (int i = 0; i < 4; i++) {
         print("Yes");
     }
 

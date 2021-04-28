@@ -9,6 +9,11 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
 
     std::ifstream myFile(filename);
 
+    if (!myFile.is_open()) {
+        std::cout << "Unable to open " << filename << "\n";
+        exit(1);
+    }
+
     std::list<Token> tokenlist{};
 
     char c;
