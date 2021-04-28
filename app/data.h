@@ -38,6 +38,6 @@ tokentype getBufferTokenType( std::string buffer );
 tokentype getSymbolTokenType ( char symbol );
 
 // analyzer.cpp
-void analyze( std::list<Token> tokenlist );
+int analyze( std::list<Token> tokenlist );
 
 #endif

@@ -17,7 +17,9 @@ int main( int argc, char **argv ) {
         print_tokens = true;
 
     std::list<Token> token_list = lexer(argv[1], print_tokens);
-    analyze(token_list);
+    int num_errors = analyze(token_list);
+
+    std::cout << "Errors found: " << num_errors << "\n";
 
     return 0;
 }

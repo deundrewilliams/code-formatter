@@ -3,7 +3,7 @@
 
 #include "data.h"
 
-void analyze( std::list<Token> tokenlist ) {
+int analyze( std::list<Token> tokenlist ) {
 
     auto i = tokenlist.begin();
     std::list<Token>::iterator next;
@@ -11,6 +11,8 @@ void analyze( std::list<Token> tokenlist ) {
 
     int line_number = 1;
     int nest_level = 0;
+
+    int error_count = 0;
 
     while (i != tokenlist.end()) {
 
@@ -33,6 +35,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                     if (next->getType() != rbracesym) {
                         std::cout << "(Line " << line_number << ") Error: Indent by " << nest_level * 4 << " spaces.\n";
+                        error_count++;
                     }
 
 
@@ -47,6 +50,7 @@ void analyze( std::list<Token> tokenlist ) {
 
             if (i->getValue() > 80) {
                 std::cout << "(Line " << line_number << ") Error: Line longer than 80 characters.\n";
+                error_count++;
             }
 
         }
@@ -66,6 +70,7 @@ void analyze( std::list<Token> tokenlist ) {
                 // If not a space, output error
                 if (i->getType() != spacesym) {
                     std::cout << "(Line " << line_number << ") Error: Space should follow inline comment start.\n";
+                    error_count++;
                 }
 
                 // Go back until newline character, if find a nonspace before newline, throw error
@@ -75,6 +80,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                     if (rev->getType() != spacesym) {
                         std::cout << "(Line " << line_number << ") Error: Comment must begin on new line.\n";
+                        error_count++;
                         break;
                     }
 
@@ -95,6 +101,7 @@ void analyze( std::list<Token> tokenlist ) {
 
             if (next->getType() == spacesym) {
                 std::cout << "(Line " << line_number << ") Error: There should be no space between preprocessor directives.\n";
+                error_count++;
             }
 
         }
@@ -108,6 +115,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                 if (prev->getType() != spacesym) {
                     std::cout << "(Line " << line_number << ") Error: Curly brace must begin on new line.\n";
+                    error_count++;
                     break;
                 }
 
@@ -145,6 +153,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                 if (main_param_chars == 0) {
                     std::cout << "(Line " << line_number << ") Error: main() parameters cannot be empty.\n";
+                    error_count++;
                 }
 
             } else {
@@ -182,6 +191,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                         // Throw error
                         std::cout << "(Line " << line_number << ") Error: Asterisk should be next to identifer in pointer declaration.\n";
+                        error_count++;
 
                     }
                 }
@@ -191,6 +201,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                 // Throw error
                 std::cout << "(Line " << line_number << ") Error: Asterisk should be next to identifer in pointer declaration.\n";
+                error_count++;
 
             }
 
@@ -209,4 +220,6 @@ void analyze( std::list<Token> tokenlist ) {
 
     }
 
+
+    return error_count;
 }
