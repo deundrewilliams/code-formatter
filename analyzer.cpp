@@ -45,11 +45,18 @@ void analyze( std::list<Token> tokenlist ) {
                     std::cout << "(Line " << line_number << ") Error: Space should follow inline comment start.\n";
                 }
 
-                // Go back 3, check if a newline character
-                std::list<Token>::iterator prev_3 = std::prev(i, 3);
+                // Go back until newline character, if find a nonspace before newline, throw error
+                std::list<Token>::iterator rev = std::prev(i, 3);
 
-                if (prev_3->getType() != newlinesym) {
-                    std::cout << "(Line " << line_number << ") Error: Comment must begin on new line.\n";
+                while (rev->getType() != newlinesym) {
+
+                    if (rev->getType() != spacesym) {
+                        std::cout << "(Line " << line_number << ") Error: Comment must begin on new line.\n";
+                        break;
+                    }
+
+                    rev = std::prev(rev, 1);
+
                 }
 
             } else {

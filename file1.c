@@ -2,8 +2,7 @@
 
 int main(void) {
 
-    //Bad formatted comment
-    int x = 12;
+    int x = 12; //Bad formatted comment
 
     char buffer[] = "lklkaskalsklasjdklsajda;lskdjaslkdja;dlakdjflksdfalsd;fsldksld";
 
