@@ -23,7 +23,7 @@ std::string Token::description() {
     case jmpsym:
         return "JMPSYM";
     case spacesym:
-        return "SPACESYM";
+        return "SPACESYM (" + std::to_string(value) + ")";
     case linelensym:
         return "LINELEN (" + std::to_string(value) + ")";
     case newlinesym:
@@ -44,6 +44,12 @@ std::string Token::description() {
         return "EQLSYM";
     case semisym:
         return "SEMISYM";
+    case lbracesym:
+        return "LBRACESYM";
+    case rbracesym:
+        return "RBRACESYM";
+    case slashsym:
+        return "SLASHSYM";
 
     default:
         return "INVALIDSYM";

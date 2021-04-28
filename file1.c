@@ -1,14 +1,16 @@
-# include <stdio.h>
+#include <stdio.h>
 
-int main(void) {
+int main(void)
+{
 
-    int x = 12; //Bad formatted comment
+    // Bad formatted comment
+    int x = 12;
 
-    int* e = NULL;
+    int *e = NULL;
     int *b = NULL;
-    int * r = NULL;
+    int *r = NULL;
 
-    char buffer[] = "lklkaskalsklasjdklsajda;lskdjaslkdja;dlakdjflksdfalsd;fsldksld";
+    char buffer[] = ";lskdjaslkdja;dlakdjflksdfalsd;fsldksld";
 
     printf("Hello, World!\n");
 

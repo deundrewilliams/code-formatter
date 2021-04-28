@@ -17,6 +17,8 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
 
     int line_length = 0;
 
+    int space_counter = 0;
+
     while (myFile.get(c)) {
 
         line_length++;
@@ -36,6 +38,14 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
                 // If new line
                 if (c == '\n') {
 
+                    // Clear space counter and add space if necessary
+                    if (space_counter > 0) {
+                        // std::cout << "Adding space of " << space_counter << "\n";
+                        tokenlist.push_back(Token(spacesym, space_counter));
+                        // std::cout << "Space counter to 0\n";
+                        space_counter = 0;
+                    }
+
                     if (!buffer.empty()) {
 
                         // Analyze buffer and add token
@@ -53,6 +63,8 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
                         // Clear buffer
                         buffer.clear();
                     }
+
+
 
                     // Add line length token
                     // std::cout << "LINECOUNT (" << line_length << ")\n";
@@ -73,6 +85,14 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
 
                     if (!buffer.empty()) {
 
+                        // Clear space counter and add space if necessary
+                        if (space_counter > 0) {
+                            // std::cout << "Adding space of " << space_counter << "\n";
+                            tokenlist.push_back(Token(spacesym, space_counter));
+                            space_counter = 0;
+                            // std::cout << "Space counter to 0\n";
+                        }
+
                         // Analyze buffer and add token
                         // std::cout << "Analyzing '" << buffer << "'\n";
                         tokentype new_type = getBufferTokenType(buffer);
@@ -91,15 +111,24 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
                     // Clear buffer
                     buffer.clear();
 
-                    // Add space token
+                    // Increment space counter
                     // std::cout << "SPACESYM\n";
-                    tokenlist.push_back(Token(spacesym));
+                    // tokenlist.push_back(Token(spacesym));
+                    space_counter++;
 
                 }
             }
 
             // If a symbol
             else {
+
+                // Clear space counter and add space if necessary
+                if (space_counter > 0) {
+                    // std::cout << "Adding space of " << space_counter << "\n";
+                    tokenlist.push_back(Token(spacesym, space_counter));
+                    space_counter = 0;
+                    // std::cout << "Space counter to 0\n";
+                }
 
                 if (!buffer.empty()) {
 
@@ -121,6 +150,8 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
 
                 // Clear buffer
                 buffer.clear();
+
+
 
                 // Determine symbol type and add token
                 // std::cout << c << " SYM\n";
