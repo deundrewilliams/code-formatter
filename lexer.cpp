@@ -16,7 +16,6 @@ std::list<Token> lexer( std::string filename, bool print_flag ) {
     std::string buffer = "";
 
     int line_length = 0;
-
     int space_counter = 0;
 
     while (myFile.get(c)) {

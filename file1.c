@@ -12,6 +12,11 @@ int main(void)
 
     char buffer[] = ";lskdjaslkdja;dlakdjflksdfalsd;fsldksld";
 
+    for (int i = 0; i < 4; i++)
+    {
+        print("Yes");
+    }
+
     printf("Hello, World!\n");
 
     return 0;

@@ -7,8 +7,10 @@ void analyze( std::list<Token> tokenlist ) {
 
     auto i = tokenlist.begin();
     std::list<Token>::iterator next;
+    std::list<Token>::iterator prev;
 
     int line_number = 1;
+    int nest_level = 0;
 
     while (i != tokenlist.end()) {
 
@@ -18,6 +20,26 @@ void analyze( std::list<Token> tokenlist ) {
         if (i->getType() == newlinesym) {
             // std::cout << "Increasing line number to " << line_number + 1 << "\n";
             line_number += 1;
+
+            next = std::next(i, 1);
+
+            // If this line is indented
+            if (next->getType() == spacesym) {
+
+                // If the indentation is not equal to 4 spaces
+                if (next->getValue() != (nest_level * 4)) {
+
+                    next = std::next(next, 1);
+
+                    if (next->getType() != rbracesym) {
+                        std::cout << "(Line " << line_number << ") Error: Indent by " << nest_level * 4 << " spaces.\n";
+                    }
+
+
+                }
+
+            }
+
         }
 
         // Line length <= 80
@@ -82,10 +104,17 @@ void analyze( std::list<Token> tokenlist ) {
 
             std::list<Token>::iterator prev = std::prev(i, 1);
 
-            if (prev->getType() != newlinesym) {
-                std::cout << "(Line " << line_number << ") Error: Curly brace must begin on new line.\n";
+            while (prev->getType() != newlinesym) {
+
+                if (prev->getType() != spacesym) {
+                    std::cout << "(Line " << line_number << ") Error: Curly brace must begin on new line.\n";
+                }
+
+                prev = std::prev(prev, 1);
+
             }
 
+            nest_level++;
 
         }
 
@@ -128,7 +157,7 @@ void analyze( std::list<Token> tokenlist ) {
         // Indent 4 spaces at a time
 
         // When declaring a pointer, asterisk, should go next to identifier
-        else if (i ->getType() == typespecsym) {
+        else if (i->getType() == typespecsym) {
 
             // Get next token
             next = std::next(i, 1);
@@ -167,6 +196,13 @@ void analyze( std::list<Token> tokenlist ) {
         }
 
         // Don't mix declaring and initializing variables
+
+        else if (i->getType() == rbracesym) {
+
+            nest_level--;
+            // std::cout << "Nest level is " << nest_level << " on line " << line_number << "\n";
+
+        }
 
         i = std::next(i, 1);
 
