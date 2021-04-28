@@ -108,6 +108,7 @@ void analyze( std::list<Token> tokenlist ) {
 
                 if (prev->getType() != spacesym) {
                     std::cout << "(Line " << line_number << ") Error: Curly brace must begin on new line.\n";
+                    break;
                 }
 
                 prev = std::prev(prev, 1);
